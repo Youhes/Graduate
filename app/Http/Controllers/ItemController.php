@@ -20,13 +20,29 @@ class ItemController extends Controller
 
     /**
      * 商品一覧
+     * param Request $request
+     * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // 商品一覧取得
         $items = Item::all();
 
-        return view('item.index', compact('items'));
+         //クエリ生成
+    $query = Item::query();
+    //キーワード受け取り
+    $keyword = $request->input('keyword');
+    //もしキーワードがあったら
+    if(isset($keyword))
+    {
+       $query->where('detail','like',"%{$keyword}%");
+       $query->orwhere('name','like',"%{$keyword}%");
+    }
+
+//全件件取得
+$items = $query->orderBy('id', 'asc')->paginate(12);
+
+        return view('item.index', compact('items', 'keyword'));
     }
 
     /**
@@ -54,4 +70,17 @@ class ItemController extends Controller
 
         return view('item.add');
     }
+
+
+/*
+ *詳細表示      
+ * 
+ *  
+ */
+     public function show($id){
+
+        $item = Item::findOrFail($id);
+        return view('item.show')->with('item', $item);
+     }
+
 }

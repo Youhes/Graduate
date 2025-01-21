@@ -16,6 +16,11 @@ return new class extends Migration
             $table->bigInteger('user_id')->unsigned()->index();
             $table->string('name', 100)->index();
             $table->string('type', 100)->nullable();
+            $table->string('path1')->nullable();
+            $table->string('path2')->nullable();
+            $table->string('path3')->nullable();
+            $table->string('path4')->nullable();
+            $table->string('path5')->nullable();
             $table->string('detail', 500)->nullable();
             $table->text('image')->nullable();
             $table->timestamps();

@@ -31,20 +31,31 @@
     <ul class="bl_flexContainer">
     @foreach ($items as $item)
     <li class="el_flexItem">
-    <button class="card card-skin" onclick="location.href='/items/show/{id}'">
-  <div class="card__imgframe"></div>
+    <button class="card card-skin">
+  <div class="card__imgframe"><img src="{{ asset('storage/images/' . basename($item->path1)) }}" alt="" height="150px"></div>
   <div class="card__textbox">
+  <li>
+    <a href="/items/show/{{ $item->id }}" class="btn btn-outline-primary" margin-bottom="10px">
+    詳細
+    </a>
+    <a href="/items/edit/{{ $item->id }}" class="btn btn-outline-primary">
+    編集
+    </a></li>
     <div class="card__titletext">
-    id{{ $item->id }}タイトルがはいります。タイトルがはいります。
+    {!! (Str::limit($item->name, 36, '...')) !!}
     </div>
-    <div class="card__overviewtext">
-    名前{{ $item->name }}概要がはいります。概要がはいります。概要がはいります。概要がはいります。
-    </div>
+    
+    
+    
   </div>
 </button>
 </li>
        @endforeach
+       @if (empty($item))
+               キーワードに該当するデータ：0件            
+        @endif
 </ul>
+
             </div>
         </div>
     </div>

@@ -59,7 +59,7 @@
             </div>
         </div>
     </div>
-    {{ $items->appends(request()->query())->links('vendor\pagination.bootstrap-5') }}
+    {{ $items->appends(request()->query())->links('vendor/pagination.bootstrap-5') }}
 @stop
 
 

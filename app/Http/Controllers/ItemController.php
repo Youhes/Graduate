@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
- 
+
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -94,14 +94,18 @@ class ItemController extends Controller
                 'images.*' => 'nullable|file|mimes:jpeg,png,jpe,jpg|max:3000',
             ]);
         }
-        $images = $request->file('images');
-        //dd($images);
 
+        $images = $request->file('images');
+        //
         $paths = [];
-        foreach ($images as $image) {
-            if ($image->isValid()) {
-                $path = $image->store('public/images');
-                $paths[] = $path;
+        if (empty($images)) {
+            $images = [];
+        } else {
+            foreach ($images as $image) {
+                if ($image->isValid()) {
+                    $path = $image->store('public/images');
+                    $paths[] = $path;
+                }
             }
         }
 
@@ -140,45 +144,85 @@ class ItemController extends Controller
 
     /**
      * 更新する
+     * 
      * @param Request $request
      * @param $id
      * @return Response
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required|max:100',
-        ],
-        [
-            'name.required' => 'タイトルは必須です。',
-            'name.max' => '100文字以内で入力してください。',
-        ]);
+        $request->validate(
+            [
+                'name' => 'required|max:100',
+                'path1' => 'nullable',
+                'path2' => 'nullable',
+                'path3' => 'nullable',
+                'path4' => 'nullable',
+                'path5' => 'nullable',
+            ],
+            [
+                'name.required' => 'タイトルは必須です。',
+                'name.max' => '100文字以内で入力してください。',
+            ]
+        );
 
-        $item = Item::find($request->id);
+        $item = Item::find($id);
 
-        $images = $request->file('images');
-        $paths = $item->images;
-       
 
-        $paths = [];
-        foreach ($images as $image) {
-            if (isset($image)) {
-                    Storage::disk('public')->delete('images/'.$image);
-                    $path = $image->store('public/images');
-                    $paths[] = $path;
-                        }
-                    };
-                     //dd($images);
+        if (empty($image1['image1'])) {
+            $path1 = $item->path1;
+        } else {
+            Storage::delete($item->path1);
+            $image1 = $request->file('image1');
+            $path1 = $image1->store('public/images');
+        }
 
-       
+        if (empty($image2['image2'])) {
+            $path2 = $item->path2;
+        } else {
+            Storage::delete($item->path2);
+            $image2 = $request->file('image2');
+            $path2 = $image2->store('public/images');
+        }
+
+
+        if (empty($image3['image3'])) {
+            $path3 = $item->path3;
+        } else {
+            Storage::delete($item->path3);
+            $image3 = $request->file('image3');
+            $path3 = $image3->store('public/images');
+        }
+
+        if (empty($image4['image4'])) {
+            $path4 = $item->path4;
+        } else {
+            Storage::delete($item->path4);
+            $image4 = $request->file('image4');
+            $path4 = $image4->store('public/images');
+        }
+
+        if (empty($image5['image5'])) {
+            $path5 = $item->path5;
+        } else {
+            Storage::delete($item->path5);
+            $image5 = $request->file('image5');
+            $path5 = $image5->store('public/images');
+        }
+
+
         $item->update([
-        'name'=> $request->name,
-        'type'=> $request->type,
-        'detail' => $request->detail,
-        'paths' => $paths,
+            'name' => $request->name,
+            'type' => $request->type,
+            'detail' => $request->detail,
+            'path1' => $path1,
+            'path2' => $path2,
+            'path3' => $path3,
+            'path4' => $path4,
+            'path5' => $path5,
         ]);
 
-        return redirect('/items')->with('success', "フォルダ{$item->id}を更新しました！");
+        return redirect('/items');
     }
 
     /**

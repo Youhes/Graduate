@@ -14,7 +14,7 @@
     <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title" >最終更新:{{ $item->updated_at }} </h3>
+                    <h3 class="card-title" >作成日時 {{ $item->updated_at }} | 最終更新 {{ $item->updated_at }} </h3>
                     <span></span>
                     <div class="card-tools">
                         <div class="input-group input-group-sm">
@@ -28,15 +28,18 @@
                 <div class="card-body">
 
                     <div class="form-group">
-                    <label for="date">タイトル：<br>{!! nl2br($item->name) !!}</label>
+                    <label for="date">タイトル：</label><br>
+                    <span class= "text">{!! nl2br($item->name) !!}</span>
                     </div>
 
                     <div class="form-group">
-                    <label for="date">場所：<br>{!! nl2br($item->type) !!}</label>
+                    <label for="date">場所：</label><br>
+                    <span class= "text">{!! nl2br($item->type) !!}</span>
                     </div>
 
                     <div class="form-group">
-                    <label for="date">詳細：<br>{!! nl2br($item->detail) !!} </label>
+                    <label for="date">詳細： </label><br>
+                    <span class= "text">{!! nl2br($item->detail) !!}</span>
                     </div>
 
                     <div class="form-group">
@@ -47,11 +50,11 @@
    
 
         <div class="example">
-        <img src="{{ asset('storage/images/' . basename($item->path1)) }}"  >
-        <img src="{{ asset('storage/images/' . basename($item->path2)) }}"  >
-        <img src="{{ asset('storage/images/' . basename($item->path3)) }}"  >
-        <img src="{{ asset('storage/images/' . basename($item->path4)) }}"  >
-       <img src="{{ asset('storage/images/' . basename($item->path5)) }}"  >
+        <img src="{{ asset('storage/images/' . basename($item->path1)) }}" onerror="this.style.display='none'">
+        <img src="{{ asset('storage/images/' . basename($item->path2)) }}" onerror="this.style.display='none'">
+        <img src="{{ asset('storage/images/' . basename($item->path3)) }}" onerror="this.style.display='none'">
+        <img src="{{ asset('storage/images/' . basename($item->path4)) }}" onerror="this.style.display='none'">
+       <img src="{{ asset('storage/images/' . basename($item->path5)) }}" onerror="this.style.display='none'">
        </div>
 
     </div>

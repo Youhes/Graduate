@@ -56,19 +56,19 @@
                 <!--画像-->
                 <div class="bl_formGroup">
                          <label for="image1" class="el_label">①画像アップロード</label>
-                         <input type="file" class="el_form" id="path1" name="images[]" ></input>
+                         <input type="file" class="el_form" id="image1" name="image1"></input>
                         <br>
                          <label for="image2" class="el_label">②画像アップロード</label>
-                         <input type="file" class="el_form" id="path2" name="images[]"></input>
+                         <input type="file" class="el_form" id="image2" name="image2"></input>
                          <br>
                          <label for="image3" class="el_label">③画像アップロード</label>
-                         <input type="file" class="el_form" id="path3" name="images[]"></input>
+                         <input type="file" class="el_form" id="image3" name="image3"></input>
                          <br>
                          <label for="image4" class="el_label">④画像アップロード</label>
-                         <input type="file" class="el_form" id="path4" name="images[]"></input>
+                         <input type="file" class="el_form" id="image4" name="image4"></input>
                          <br>
                          <label for="image5" class="el_label">⑤画像アップロード</label>
-                         <input type="file" class="el_form" id="path5" name="images[]"></input>
+                         <input type="file" class="el_form" id="image5" name="image5"></input>
                          
    
 <div class="bl_imgWrapper">

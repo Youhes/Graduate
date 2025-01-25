@@ -142,8 +142,8 @@ class ItemController extends Controller
         $request->validate(
             [
                 'name' => 'required|max:100',
-                'type' => 'max:100',
-                'type' => 'max:500',
+                'type' => 'nullable|max:100',
+                'detail' => 'nullable|max:500',
                 'image1' => 'nullable',
                 'image2' => 'nullable',
                 'image3' => 'nullable',

@@ -142,6 +142,8 @@ class ItemController extends Controller
         $request->validate(
             [
                 'name' => 'required|max:100',
+                'type' => 'max:100',
+                'type' => 'max:500',
                 'image1' => 'nullable',
                 'image2' => 'nullable',
                 'image3' => 'nullable',
@@ -151,6 +153,8 @@ class ItemController extends Controller
             [
                 'name.required' => 'タイトルは必須です。',
                 'name.max' => '100文字以内で入力してください。',
+                'type.max' => '100文字以内で入力してください。',
+                'detail.max' => '500文字以内で入力してください。',
             ]
         );
 

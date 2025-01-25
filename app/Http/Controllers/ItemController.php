@@ -88,7 +88,7 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         // POSTリクエストのとき
-        if ($request->isMethod('post')) {
+        if ($request->ismethod('post')) {
             // バリデーション
             $this->validate($request, [
                 'images.*' => 'nullable|file|mimes:jpeg,png,jpe,jpg|max:3000',
@@ -99,16 +99,16 @@ class ItemController extends Controller
         $paths = [];
         if (!empty($images)) {
             foreach ($images as $image) {
-                if ($image->isValid()) {
+                if ($image->isvalid()) {
                     // $path = $image->store('public/images');
-                    $path = Storage::disk('s3')->put('guraduate/test', $image);
+                    $path = storage::disk('s3')->put('guraduate/test', $image);
                     $paths[] = $path;
                 }
             }
         }
 
         $item = new Item;
-        $item->user_id = Auth::id();
+        $item->user_id = auth::id();
         $item->name = $request->name;
         $item->type = $request->type;
         $item->detail = $request->detail;

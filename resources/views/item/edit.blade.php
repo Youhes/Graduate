@@ -37,8 +37,8 @@
 
                 <!-- 場所 -->
                 <div class="mb-3">
-                <label for="name" class="form-label">場所</label>
-                <input type="text" name="name" id="type" class="form-control w-100" value="{{ old('type', $item->type) }}">
+                <label for="type" class="form-label">場所</label>
+                <input type="text" name="type" id="type" class="form-control w-100" value="{{ old('type', $item->type) }}">
                 @error('type')
                 <div class="text-danger">{{ $message }}</div>
                  @enderror
@@ -46,8 +46,8 @@
 
                 <!-- 詳細詳細 -->
                 <div class="mb-3">
-                <label for="name" class="form-label">詳細</label>
-                <input type="text" name="name" id="detail" class="form-control w-100" value="{{ old('detail', $item->detail) }}">
+                <label for="detail" class="form-label">詳細</label>
+                <input type="text" name="detail" id="detail" class="form-control w-100" value="{{ old('detail', $item->detail) }}">
                 @error('detail')
                 <div class="text-danger">{{ $message }}</div>
                  @enderror

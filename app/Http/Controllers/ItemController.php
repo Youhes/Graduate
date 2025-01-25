@@ -103,7 +103,7 @@ class ItemController extends Controller
         } else {
             foreach ($images as $image) {
                 if ($image->isValid()) {
-                    $path = $image->store('public/images');
+                    $path = $image->store('s3');
                     $paths[] = $path;
                 }
             }
@@ -118,18 +118,6 @@ class ItemController extends Controller
         $item->save();
 
         return redirect('/items');
-    }
-
-
-    /*
- *詳細表示      
- * 
- */
-    public function show($id)
-    {
-
-        $item = Item::findOrfail($id);
-        return view('item.show', compact('item'));
     }
 
     /**
@@ -151,14 +139,15 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request);
         $request->validate(
             [
                 'name' => 'required|max:100',
-                'path1' => 'nullable',
-                'path2' => 'nullable',
-                'path3' => 'nullable',
-                'path4' => 'nullable',
-                'path5' => 'nullable',
+                'image1' => 'nullable',
+                'image2' => 'nullable',
+                'image3' => 'nullable',
+                'image4' => 'nullable',
+                'image5' => 'nullable',
             ],
             [
                 'name.required' => 'タイトルは必須です。',
@@ -169,60 +158,75 @@ class ItemController extends Controller
         $item = Item::find($id);
 
 
-        if (empty($image1['image1'])) {
-            $path1 = $item->path1;
-        } else {
-            Storage::delete($item->path1);
+        if (!empty($request->file('image1'))) {
+            if($item->path1){
+                Storage::delete($item->path1);
+            }
             $image1 = $request->file('image1');
             $path1 = $image1->store('public/images');
+            $item->path1 = $path1;
+            $item->update();
         }
 
-        if (empty($image2['image2'])) {
-            $path2 = $item->path2;
-        } else {
-            Storage::delete($item->path2);
+        
+        if (!empty($request->file('image2'))) {
+            if($item->path2){
+                Storage::delete($item->path2);
+            }
             $image2 = $request->file('image2');
             $path2 = $image2->store('public/images');
+            $item->path2 = $path2;
+            $item->update();
         }
 
-
-        if (empty($image3['image3'])) {
-            $path3 = $item->path3;
-        } else {
-            Storage::delete($item->path3);
+        if (!empty($request->file('image3'))) {
+            if($item->path1){
+                Storage::delete($item->path1);
+            }
             $image3 = $request->file('image3');
             $path3 = $image3->store('public/images');
+            $item->path3 = $path3;
+            $item->update();
         }
 
-        if (empty($image4['image4'])) {
-            $path4 = $item->path4;
-        } else {
-            Storage::delete($item->path4);
+        if (!empty($request->file('image4'))) {
+            if($item->path4){
+                Storage::delete($item->path4);
+            }
             $image4 = $request->file('image4');
             $path4 = $image4->store('public/images');
+            $item->path4 = $path4;
+            $item->update();
         }
 
-        if (empty($image5['image5'])) {
-            $path5 = $item->path5;
-        } else {
-            Storage::delete($item->path5);
+        if (!empty($request->file('image5'))) {
+            if($item->path5){
+                Storage::delete($item->path5);
+            }
             $image5 = $request->file('image5');
             $path5 = $image5->store('public/images');
+            $item->path5 = $path5;
+            $item->update();
         }
-
 
         $item->update([
             'name' => $request->name,
             'type' => $request->type,
             'detail' => $request->detail,
-            'path1' => $path1,
-            'path2' => $path2,
-            'path3' => $path3,
-            'path4' => $path4,
-            'path5' => $path5,
+        
         ]);
 
         return redirect('/items');
+    }
+     /*
+    *詳細表示      
+    * 
+    */
+    public function show($id)
+    {
+
+    $item = Item::findOrfail($id);
+    return view('item.show', compact('item'));
     }
 
     /**

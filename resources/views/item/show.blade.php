@@ -50,11 +50,11 @@
    
 
         <div class="example">
-        <img src="{{ ($item->path1)) }}" onerror="this.style.display='none'">
-        <img src="{{ ($item->path2)) }}" onerror="this.style.display='none'">
-        <img src="{{ ($item->path3)) }}" onerror="this.style.display='none'">
-        <img src="{{ ($item->path4)) }}" onerror="this.style.display='none'">
-       <img src="{{ ($item->path5)) }}" onerror="this.style.display='none'">
+        <img src="{{ ($item->path1) }}" onerror="this.style.display='none'">
+        <img src="{{ ($item->path2) }}" onerror="this.style.display='none'">
+        <img src="{{ ($item->path3) }}" onerror="this.style.display='none'">
+        <img src="{{ ($item->path4) }}" onerror="this.style.display='none'">
+       <img src="{{ ($item->path5) }}" onerror="this.style.display='none'">
        </div>
 
     </div>

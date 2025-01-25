@@ -96,7 +96,6 @@ class ItemController extends Controller
         }
 
         $images = $request->file('images');
-        //
         $paths = [];
         if (!empty($images)) {
             foreach ($images as $image) {

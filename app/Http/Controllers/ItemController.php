@@ -98,12 +98,11 @@ class ItemController extends Controller
         $images = $request->file('images');
         //
         $paths = [];
-        if (empty($images)) {
-            $images = [];
-        } else {
+        if (!empty($images)) {
             foreach ($images as $image) {
                 if ($image->isValid()) {
-                    $path = $image->store('s3');
+                    // $path = $image->store('public/images');
+                    $path = Storage::disk('s3')->put('guraduate/test', $image);
                     $paths[] = $path;
                 }
             }
@@ -163,7 +162,7 @@ class ItemController extends Controller
                 Storage::delete($item->path1);
             }
             $image1 = $request->file('image1');
-            $path1 = $image1->store('public/images');
+            $path1 = Storage::disk('s3')->put('guraduate/test', $image1);
             $item->path1 = $path1;
             $item->update();
         }
@@ -174,7 +173,7 @@ class ItemController extends Controller
                 Storage::delete($item->path2);
             }
             $image2 = $request->file('image2');
-            $path2 = $image2->store('public/images');
+            $path2 = Storage::disk('s3')->put('guraduate/test', $image2);
             $item->path2 = $path2;
             $item->update();
         }
@@ -184,7 +183,7 @@ class ItemController extends Controller
                 Storage::delete($item->path1);
             }
             $image3 = $request->file('image3');
-            $path3 = $image3->store('public/images');
+            $path3 = Storage::disk('s3')->put('guraduate/test', $image3);
             $item->path3 = $path3;
             $item->update();
         }
@@ -194,7 +193,7 @@ class ItemController extends Controller
                 Storage::delete($item->path4);
             }
             $image4 = $request->file('image4');
-            $path4 = $image4->store('public/images');
+            $path4 = Storage::disk('s3')->put('guraduate/test', $image4);
             $item->path4 = $path4;
             $item->update();
         }
@@ -204,7 +203,7 @@ class ItemController extends Controller
                 Storage::delete($item->path5);
             }
             $image5 = $request->file('image5');
-            $path5 = $image5->store('public/images');
+            $path5 = Storage::disk('s3')->put('guraduate/test', $image5);
             $item->path5 = $path5;
             $item->update();
         }

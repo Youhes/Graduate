@@ -50,11 +50,21 @@
    
 
         <div class="example">
-        <img src="{{ ($item->path1) }}" onerror="this.style.display='none'">
-        <img src="{{ ($item->path2) }}" onerror="this.style.display='none'">
-        <img src="{{ ($item->path3) }}" onerror="this.style.display='none'">
-        <img src="{{ ($item->path4) }}" onerror="this.style.display='none'">
-       <img src="{{ ($item->path5) }}" onerror="this.style.display='none'">
+        @if(!empty($item->path1))
+        <img src="{{ Storage::disk('s3')->url($item->path1) }}" onerror="this.style.display='none'"></img>
+        @endif
+        @if(!empty($item->path2))
+        <img src="{{ Storage::disk('s3')->url($item->path2) }}" onerror="this.style.display='none'"></img>   
+        @endif
+        @if(!empty($item->path3))
+        <img src="{{ Storage::disk('s3')->url($item->path3) }}" onerror="this.style.display='none'"></img>
+        @endif
+        @if(!empty($item->path4))
+        <img src="{{ Storage::disk('s3')->url($item->path4) }}" onerror="this.style.display='none'"></img>
+        @endif
+        @if(!empty($item->path5))
+       <img src="{{ Storage::disk('s3')->url($item->path5) }}" onerror="this.style.display='none'"></img>
+        @endif
        </div>
 
     </div>

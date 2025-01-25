@@ -32,7 +32,11 @@
     @foreach ($items as $item)
     <li class="el_flexItem">
     <button class="card card-skin">
-  <div class="card__imgframe"><img src="{{ asset('storage/images/' . basename($item->path1)) }}" alt="" height="150px"></div>
+  <div class="card__imgframe">
+   
+    <img src="{{ Storage::disk('s3')->url($item->path1) }}" alt="" height="150px"></img>
+   
+    </div>
   <div class="card__textbox">
   <li>
     <a href="/items/show/{{ $item->id }}" class="btn btn-outline-primary" margin-bottom="10px">

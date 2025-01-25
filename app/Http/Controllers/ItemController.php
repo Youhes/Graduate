@@ -56,15 +56,15 @@ class ItemController extends Controller
     public function add(Request $request)
     {
         // POSTリクエストのとき
-        if ($request->isMethod('post')) {
+        if ($request->ismethod('post')) {
             // バリデーション
             $this->validate($request, [
                 'name' => 'required|max:100',
             ]);
 
             // 商品登録
-            Item::create([
-                'user_id' => Auth::user()->id,
+            item::create([
+                'user_id' => auth::user()->id,
                 'name' => $request->name,
                 'path1' => $request->path1,
                 'path2' => $request->path2,
@@ -107,7 +107,7 @@ class ItemController extends Controller
             }
         }
 
-        $item = new Item;
+        $item = new item;
         $item->user_id = auth::id();
         $item->name = $request->name;
         $item->type = $request->type;

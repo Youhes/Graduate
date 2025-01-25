@@ -56,15 +56,15 @@ class ItemController extends Controller
     public function add(Request $request)
     {
         // POSTリクエストのとき
-        if ($request->ismethod('post')) {
+        if ($request->isMethod('post')) {
             // バリデーション
             $this->validate($request, [
                 'name' => 'required|max:100',
             ]);
 
             // 商品登録
-            item::create([
-                'user_id' => auth::user()->id,
+            Item::create([
+                'user_id' => Auth::user()->id,
                 'name' => $request->name,
                 'path1' => $request->path1,
                 'path2' => $request->path2,
@@ -88,7 +88,7 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         // POSTリクエストのとき
-        if ($request->ismethod('post')) {
+        if ($request->isMethod('post')) {
             // バリデーション
             $this->validate($request, [
                 'images.*' => 'nullable|file|mimes:jpeg,png,jpe,jpg|max:3000',
@@ -96,19 +96,20 @@ class ItemController extends Controller
         }
 
         $images = $request->file('images');
+        
         $paths = [];
         if (!empty($images)) {
             foreach ($images as $image) {
-                if ($image->isvalid()) {
+                if ($image->isValid()) {
                     // $path = $image->store('public/images');
-                    $path = storage::disk('s3')->put('guraduate/test', $image);
+                    $path = Storage::disk('s3')->put('guraduate/test', $image);
                     $paths[] = $path;
                 }
             }
         }
 
-        $item = new item;
-        $item->user_id = auth::id();
+        $item = new Item;
+        $item->user_id = Auth::id();
         $item->name = $request->name;
         $item->type = $request->type;
         $item->detail = $request->detail;

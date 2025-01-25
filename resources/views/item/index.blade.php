@@ -33,9 +33,9 @@
     <li class="el_flexItem">
     <button class="card card-skin">
   <div class="card__imgframe">
-   
+    @if (!empty($item->path1))
     <img src="{{ Storage::disk('s3')->url($item->path1) }}" alt="" height="150px"></img>
-   
+    @endif
     </div>
   <div class="card__textbox">
   <li>

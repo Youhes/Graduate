@@ -6,8 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
-use Intervention\Image\ImageManager;
-use Intervention\Image\Drivers\Gd\Driver;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
 class ItemController extends Controller
@@ -60,6 +59,9 @@ class ItemController extends Controller
             // バリデーション
             $this->validate($request, [
                 'name' => 'required|max:100',
+            ],
+            [
+                'name.required' => 'タイトルは必須です。',   
             ]);
 
             // 商品登録
@@ -91,9 +93,20 @@ class ItemController extends Controller
         if ($request->isMethod('post')) {
             // バリデーション
             $this->validate($request, [
+                'name' => 'required|max:100',
+                'type' => 'required|max:100',
+                'detail' => 'required|max:500',
                 'images.*' => 'nullable|file|mimes:jpeg,png,jpe,jpg|max:3000',
-            ]);
-        }
+            ],
+        [
+            'name.required' => 'タイトルは必須です。',
+            'name.max' =>  'タイトルは100字以内で入力してください。',
+            'type.required' => '場所は必須です。',
+            'detail.required' => '詳細は必須です。',
+            'images.*.file' => '画像を選択してください。',
+            'images.*.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。'
+        ]);
+    }
 
         $images = $request->file('images');
         
@@ -228,7 +241,7 @@ class ItemController extends Controller
     public function show($id)
     {
 
-    $item = Item::findOrfail($id);
+    $item = Item::with('user')->find($id);
     return view('item.show', compact('item'));
     }
 

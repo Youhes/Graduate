@@ -8,7 +8,7 @@
 
 @section('content')
 <link rel="stylesheet" href="/css/style.css" >
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"> -->
     <div class="row">
                     <form id="form1" method="GET" action="{{route('/items/index')}}">
                                     @csrf
@@ -56,7 +56,7 @@
 </li>
        @endforeach
        @if (empty($item))
-               キーワードに該当するデータ：0件            
+               データ：0件            
         @endif
 </ul>
 

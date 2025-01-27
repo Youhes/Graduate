@@ -42,7 +42,9 @@
     <button class="card card-skin">
   <div class="card__imgframe">
     @if (!empty($item->path1))
-    <img src="{{ Storage::disk('s3')->url($item->path1) }}" alt="" height="150px"></img>
+    <img src="{{ Storage::disk('s3')->url($item->path1) }}" alt="登録画像" height="150px"></img>
+    @else 
+    <span>画像なし</span>
     @endif
     </div>
   <div class="card__textbox">

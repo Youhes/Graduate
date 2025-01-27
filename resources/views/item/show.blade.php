@@ -14,7 +14,7 @@
     <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title" >作成者 {{ $item->user->name }}| 作成日時 {{ $item->updated_at }} | 最終更新 {{ $item->updated_at }} </h3>
+                    <h3 class="card-title" >作成者 {{ $item->user->name }} 　| 　作成日時 {{ $item->updated_at->format('Y.m.d G:i') }} 　| 　最終更新 {{ $item->updated_at->format('Y.m.d G:i') }} </h3>
                     <span></span>
                     <div class="card-tools">
                         <div class="input-group input-group-sm">
@@ -51,19 +51,19 @@
 
         <div class="example">
         @if(!empty($item->path1))
-        <img src="{{ Storage::disk('s3')->url($item->path1) }}" onerror="this.style.display='none'"></img>
+        <img src="{{ Storage::disk('s3')->url($item->path1) }}" onerror="this.style.display='none'" alt="登録画像"></img>
         @endif
         @if(!empty($item->path2))
-        <img src="{{ Storage::disk('s3')->url($item->path2) }}" onerror="this.style.display='none'"></img>   
+        <img src="{{ Storage::disk('s3')->url($item->path2) }}" onerror="this.style.display='none'" alt="登録画像"></img>   
         @endif
         @if(!empty($item->path3))
-        <img src="{{ Storage::disk('s3')->url($item->path3) }}" onerror="this.style.display='none'"></img>
+        <img src="{{ Storage::disk('s3')->url($item->path3) }}" onerror="this.style.display='none'" alt="登録画像"></img>
         @endif
         @if(!empty($item->path4))
-        <img src="{{ Storage::disk('s3')->url($item->path4) }}" onerror="this.style.display='none'"></img>
+        <img src="{{ Storage::disk('s3')->url($item->path4) }}" onerror="this.style.display='none'" alt="登録画像"></img>
         @endif
         @if(!empty($item->path5))
-       <img src="{{ Storage::disk('s3')->url($item->path5) }}" onerror="this.style.display='none'"></img>
+       <img src="{{ Storage::disk('s3')->url($item->path5) }}" onerror="this.style.display='none'" alt="登録画像"></img>
         @endif
        </div>
 

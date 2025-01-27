@@ -70,9 +70,11 @@ input[type=keyword] {
     width: 250px ;
     height: 150px;
     /* padding-top: 56.25%; */
-     background: url(https://placehold.jp/640x360.png) no-repeat center;
+     background: #DDDDDD;
+     color:gray;
     /* background-size: cover;
-    box-sizing: border-box; */
+    box-sizing: border-box;  */
+    position: relative;
   }
 
   .card__imgframe img{
@@ -81,6 +83,14 @@ input[type=keyword] {
 	vertical-align: bottom;
 	/* 追加 */
 	object-fit: cover;
+  }
+
+  .card__imgframe span{
+    text-align:center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
   }
   
   .card__textbox{

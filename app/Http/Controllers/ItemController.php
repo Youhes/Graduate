@@ -132,7 +132,7 @@ class ItemController extends Controller
         $item->paths = $paths;
         $item->save();
 
-        return redirect('/items')->with('success', "タイトル：$item->name　 登録が完了しました！");
+        return redirect('/items')->with('success', "タイトル：{$item->name}　 登録が完了しました！");
     }
 
     /**
@@ -252,7 +252,7 @@ class ItemController extends Controller
         
         ]);
 
-        return redirect('/items')->with('success', "タイトル：$item->name 　更新が完了しました！");
+        return redirect('/items')->with('success', "タイトル：{$item->name} 　更新が完了しました！");
     }
      /*
     *詳細表示      
@@ -278,6 +278,6 @@ class ItemController extends Controller
         $item = Item::find($id);
         $item->delete();
 
-        return redirect('/items')->with('success', "タイトル：$item->name  　フォルダを削除しました！");
+        return redirect('/items')->with('success', "タイトル：{$item->name}  　フォルダを削除しました！");
     }
 }

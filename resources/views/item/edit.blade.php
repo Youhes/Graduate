@@ -13,7 +13,7 @@
     <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">登録日時：{{ $item->created_at }}</h3>
+                    <h3 class="card-title">作成日時：{{ $item->updated_at->format('Y.m.d G:i') }}</h3>
                     <div class="card-tools">
                         <div class="input-group input-group-sm">
                             <div class="input-group-append">
@@ -59,7 +59,7 @@
                         @if(!empty($item->path1))
                         <label for="image1" class="el_label">下の画像を変更</label>
                          <input type="file" class="el_form" id="image1" name="image1"></input><br>
-                        <img src="{{ Storage::disk('s3')->url($item->path1) }}" onerror="this.style.display='none'"></img>
+                        <img src="{{ Storage::disk('s3')->url($item->path1) }}" onerror="this.style.display='none'" alt="登録画像"></img>
                         @else
                         <label for="image1" class="el_label">画像を追加</label>
                         <input type="file" class="el_form" id="image1" name="image1"></input>
@@ -70,48 +70,47 @@
                          @if(!empty($item->path2))
                          <label for="image2" class="el_label">下の画像を変更</label>
                          <input type="file" class="el_form" id="image2" name="image2"></input><br>
-        <img src="{{ Storage::disk('s3')->url($item->path2) }}" onerror="this.style.display='none'"></img>
-        @else
-        <label for="image2" class="el_label">画像を追加</label>
-        <input type="file" class="el_form" id="image2" name="image2"></input>
-        @endif
-        </div>
+                        <img src="{{ Storage::disk('s3')->url($item->path2) }}" onerror="this.style.display='none'" alt="登録画像"></img>
+                        @else
+                        <label for="image2" class="el_label">画像を追加</label>
+                        <input type="file" class="el_form" id="image2" name="image2"></input>
+                        @endif
+                </div>
                         
-        <div class="example">
+                 <div class="example">
                          @if(!empty($item->path3))
                          <label for="image3" class="el_label">下の画像を変更
                          </label>
                          <input type="file" class="el_form" id="image3" name="image3"></input><br>
-        <img src="{{ Storage::disk('s3')->url($item->path3) }}" onerror="this.style.display='none'"></img>
-        @else
-        <label for="image3" class="el_label">画像を追加</label>
+                        <img src="{{ Storage::disk('s3')->url($item->path3) }}" onerror="this.style.display='none'" alt="登録画像"></img>
+                        @else
+                        <label for="image3" class="el_label">画像を追加</label>
                          <input type="file" class="el_form" id="image3" name="image3"></input>
-        @endif                            
-        </div>
+                        @endif                            
+                 </div>
 
-        <div class="example">
+                 <div class="example">
                          @if(!empty($item->path4))
                          <label for="image4" class="el_label">下の画像を変更</label>
                          <input type="file" class="el_form" id="image4" name="image4"></input><br>
-        <img src="{{ Storage::disk('s3')->url($item->path4) }}" onerror="this.style.display='none'"></img>
-        @else
+                         <img src="{{ Storage::disk('s3')->url($item->path4) }}" onerror="this.style.display='none'" alt="登録画像"></img>
+                        @else
                          <label for="image4" class="el_label">画像を追加</label>
-                         <input type="file" class="el_form" id="image4" name="image4"></input>
-                         
-        @endif
-        </div>
+                         <input type="file" class="el_form" id="image4" name="image4"></input> 
+                         @endif
+                 </div>
 
-        <div class="example">
+                 <div class="example">
                          @if(!empty($item->path5))
                          <label for="image5" class="el_label">下の画像を変更</label>
                          <input type="file" class="el_form" id="image5" name="image5"></input><br>
-       <img src="{{ Storage::disk('s3')->url($item->path5) }}" onerror="this.style.display='none'"></img>
-       @else
-       <label for="image5" class="el_label">画像を追加</label>
+                        <img src="{{ Storage::disk('s3')->url($item->path5) }}" onerror="this.style.display='none'" alt="登録画像"></img>
+                        @else
+                        <label for="image5" class="el_label">画像を追加</label>
                          <input type="file" class="el_form" id="image5" name="image5"></input>
-        @endif
-       </div>
-       <span>※画像は最大5枚までアップロードできます。</span>
+                        @endif
+                </div>
+                <span>※画像は最大5枚までアップロードできます。</span>
                          @error('image1')
                          <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -128,13 +127,6 @@
                          <div class="text-danger">{{ $message }}</div>
                         @enderror
                 </div>
-               
-        
-        
-       
-                         
-   
-
 
 
 <div class="card-footer">

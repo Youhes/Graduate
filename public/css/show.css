@@ -1,3 +1,8 @@
+.card-title{
+    color: gray;
+    font-size: 13px;
+}
+
 .form-group td{
     font-weight: 400;
 }

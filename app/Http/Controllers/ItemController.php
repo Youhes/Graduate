@@ -44,7 +44,7 @@ class ItemController extends Controller
 
 
         //全件件取得
-        $items = $query->orderBy('id', 'desc')->paginate(12);
+        $items = $query->orderBy('id', 'desc')->paginate(9);
 
         return view('item.index', compact('items', 'keyword'));
     }

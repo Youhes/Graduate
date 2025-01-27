@@ -96,15 +96,18 @@ class ItemController extends Controller
                 'name' => 'required|max:100',
                 'type' => 'required|max:100',
                 'detail' => 'required|max:500',
-                'images.*' => 'nullable|file|mimes:jpeg,png,jpe,jpg|max:3000',
+                'images.*' => 'nullable|file|mimes:jpeg,png,jpe,jpg|max:2048',
             ],
         [
             'name.required' => 'タイトルは必須です。',
             'name.max' =>  'タイトルは100字以内で入力してください。',
             'type.required' => '場所は必須です。',
+            'type.max' =>  'タイトルは100字以内で入力してください。',
             'detail.required' => '詳細は必須です。',
-            'images.*.file' => '画像を選択してください。',
-            'images.*.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。'
+            'detail.max' => '詳細は500字以内で入力してください。',
+            'images.*.file' => '画像ファイルを選択してください。',
+            'images.*.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。',
+            'images.*.max' => '2M以内の画像を選択してください。',
         ]);
     }
 
@@ -129,7 +132,7 @@ class ItemController extends Controller
         $item->paths = $paths;
         $item->save();
 
-        return redirect('/items');
+        return redirect('/items')->with('success', "タイトル：$item->name　 登録が完了しました！");
     }
 
     /**
@@ -155,19 +158,36 @@ class ItemController extends Controller
         $request->validate(
             [
                 'name' => 'required|max:100',
-                'type' => 'nullable|max:100',
-                'detail' => 'nullable|max:500',
-                'image1' => 'nullable',
-                'image2' => 'nullable',
-                'image3' => 'nullable',
-                'image4' => 'nullable',
-                'image5' => 'nullable',
+                'type' => 'required|max:100',
+                'detail' => 'required|max:500',
+                'image1' => 'nullable|file|mimes:jpeg,png,jpe,jpg|max:2048',
+                'image2' => 'nullable|file|mimes:jpeg,png,jpe,jpg|max:2048',
+                'image3' => 'nullable|file|mimes:jpeg,png,jpe,jpg|max:2048',
+                'image4' => 'nullable|file|mimes:jpeg,png,jpe,jpg|max:2048',
+                'image5' => 'nullable|file|mimes:jpeg,png,jpe,jpg|max:2048',
             ],
             [
-                'name.required' => 'タイトルは必須です。',
-                'name.max' => '100文字以内で入力してください。',
-                'type.max' => '100文字以内で入力してください。',
-                'detail.max' => '500文字以内で入力してください。',
+            'name.required' => 'タイトルは必須です。',
+            'name.max' =>  'タイトルは100字以内で入力してください。',
+            'type.required' => '場所は必須です。',
+            'type.max' =>  'タイトルは100字以内で入力してください。',
+            'detail.required' => '詳細は必須です。',
+            'detail.max' => '詳細は500字以内で入力してください。',
+            'image1.file' => '画像ファイルを選択してください。',
+            'image1.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。',
+            'image1.max' => '2M以内の画像を選択してください。',
+            'image2.file' => '画像ファイルを選択してください。',
+            'image2.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。',
+            'image2.max' => '2M以内の画像を選択してください。',
+            'image3.file' => '画像ファイルを選択してください。',
+            'image3.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。',
+            'image3.max' => '2M以内の画像を選択してください。',
+            'image4.file' => '画像ファイルを選択してください。',
+            'image4.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。',
+            'image4.max' => '2M以内の画像を選択してください。',
+            'image5.file' => '画像ファイルを選択してください。',
+            'image5.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。',
+            'image5.max' => '2M以内の画像を選択してください。',
             ]
         );
 
@@ -232,7 +252,7 @@ class ItemController extends Controller
         
         ]);
 
-        return redirect('/items');
+        return redirect('/items')->with('success', "タイトル：$item->name 　更新が完了しました！");
     }
      /*
     *詳細表示      
@@ -258,6 +278,6 @@ class ItemController extends Controller
         $item = Item::find($id);
         $item->delete();
 
-        return redirect('/items')->with('success', "フォルダ{$item->id}を削除しました！");
+        return redirect('/items')->with('success', "タイトル：$item->name  　フォルダを削除しました！");
     }
 }

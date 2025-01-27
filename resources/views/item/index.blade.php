@@ -9,7 +9,15 @@
 @section('content')
 <link rel="stylesheet" href="/css/style.css" >
 <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"> -->
-    <div class="row">
+ <!-- フラッシュメッセージ表示 -->
+ @if (session('success'))
+    <div class="alert alert-info">
+        {{ session('success') }}
+    </div>
+@endif  
+<div class="row">
+
+        
                     <form id="form1" method="GET" action="{{route('/items/index')}}">
                                     @csrf
                                         <input type="keyword" class="form-control" name="keyword" value="{{ $keyword }}" placeholder="検索キーワード">

@@ -62,11 +62,6 @@ class ItemController extends Controller
                 'type' => 'required|max:100',
                 'detail' => 'required|max:500',
                 'images.*' => 'nullable|file|mimes:jpeg,png,jpe,jpg|max:1024',
-                'image1' => 'nullable|file|mimes:jpeg,png,jpe,jpg|max:1024',
-                'image2' => 'nullable|file|mimes:jpeg,png,jpe,jpg|max:1024',
-                'image3' => 'nullable|file|mimes:jpeg,png,jpe,jpg|max:1024',
-                'image4' => 'nullable|file|mimes:jpeg,png,jpe,jpg|max:1024',
-                'image5' => 'nullable|file|mimes:jpeg,png,jpe,jpg|max:1024',
             ],
             [
                 'name.required' => 'タイトルは必須です。',
@@ -78,21 +73,6 @@ class ItemController extends Controller
                 'images.*.file' => '画像ファイルを選択してください。',
                 'images.*.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。',
                 'images.*.max' => '1M以内の画像を選択してください。',
-                'image1.file' => '画像ファイルを選択してください。',
-                'image1.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。',
-                'image1.max' => '1M以内の画像を選択してください。',
-                'image2.file' => '画像ファイルを選択してください。',
-                'image2.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。',
-                'image2.max' => '1M以内の画像を選択してください。',
-                'image3.file' => '画像ファイルを選択してください。',
-                'image3.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。',
-                'image3.max' => '1M以内の画像を選択してください。',
-                'image4.file' => '画像ファイルを選択してください。',
-                'image4.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。',
-                'image4.max' => '1M以内の画像を選択してください。',
-                'image5.file' => '画像ファイルを選択してください。',
-                'image5.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。',
-                'image5.max' => '1M以内の画像を選択してください。',
             ]);
 
             // 商品登録
@@ -138,7 +118,7 @@ class ItemController extends Controller
             'detail.max' => '詳細は500字以内で入力してください。',
             'images.*.file' => '画像ファイルを選択してください。',
             'images.*.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。',
-            'images.*.max' => '1以内の画像を選択してください。',
+            'images.*.max' => '1M以内の画像を選択してください。',
         ]);
     }
 
@@ -206,19 +186,19 @@ class ItemController extends Controller
             'detail.max' => '詳細は500字以内で入力してください。',
             'image1.file' => '画像ファイルを選択してください。',
             'image1.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。',
-            'image1.max' => '1以内の画像を選択してください。',
+            'image1.max' => '1M以内の画像を選択してください。',
             'image2.file' => '画像ファイルを選択してください。',
             'image2.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。',
-            'image2.max' => '1以内の画像を選択してください。',
+            'image2.max' => '1M以内の画像を選択してください。',
             'image3.file' => '画像ファイルを選択してください。',
             'image3.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。',
-            'image3.max' => '1以内の画像を選択してください。',
+            'image3.max' => '1M以内の画像を選択してください。',
             'image4.file' => '画像ファイルを選択してください。',
             'image4.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。',
-            'image4.max' => '1以内の画像を選択してください。',
+            'image4.max' => '1M以内の画像を選択してください。',
             'image5.file' => '画像ファイルを選択してください。',
             'image5.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。',
-            'image5.max' => '1以内の画像を選択してください。',
+            'image5.max' => '1M以内の画像を選択してください。',
             ]
         );
 

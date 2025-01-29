@@ -32,7 +32,7 @@
                 
 
           
-            <form action="{{ '/items/store' }}" method="post" enctype="multipart/form-data" multiple accept=“image/png,image/jpeg,image/jpg,image/jpe”>
+            <form action="{{ '/items/store' }}" method="POST" enctype="multipart/form-data" multiple accept=“image/png,image/jpeg,image/jpg,image/jpe”>
                     @csrf
                     <div class="card-body">
 

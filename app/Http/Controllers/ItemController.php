@@ -136,9 +136,9 @@ class ItemController extends Controller
             'type.max' =>  'タイトルは100字以内で入力してください。',
             'detail.required' => '詳細は必須です。',
             'detail.max' => '詳細は500字以内で入力してください。',
-            'images.file' => '画像ファイルを選択してください。',
-            'images.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。',
-            'images.max' => '2M以内の画像を選択してください。',
+            'images.*.file' => '画像ファイルを選択してください。',
+            'images.*.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。',
+            'images.*.max' => '2M以内の画像を選択してください。',
         ]);
     }
 

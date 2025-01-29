@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', '写真管理システム')
+@section('title', '観光情報管理システム')
 
 @section('content_header')
-    <h1>写真管理</h1>
+    <h1>観光情報一覧</h1>
 @stop
 
 @section('content')
@@ -26,7 +26,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">フォルダ一覧</h3>
+                    <h3 class="card-title">一覧</h3>
                     <div class="card-tools">
                         <div class="input-group input-group-sm">
                             <div class="input-group-append">

@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => '写真管理',
+    'title' => '観光情報管理',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,12 +63,12 @@ return [
     |
     */
 
-    'logo' => '<b>写真管理</b>',
+    'logo' => '<b>観光情報管理</b>',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => '写真管理',
+    'logo_img_alt' => '観光情報管理',
 
     /*
     |--------------------------------------------------------------------------

@@ -59,9 +59,20 @@ class ItemController extends Controller
             // バリデーション
             $this->validate($request, [
                 'name' => 'required|max:100',
+                'type' => 'required|max:100',
+                'detail' => 'required|max:500',
+                'images.*' => 'nullable|file|mimes:jpeg,png,jpe,jpg|max:2048',
             ],
             [
-                'name.required' => 'タイトルは必須です。',   
+                'name.required' => 'タイトルは必須です。',
+                'name.max' =>  'タイトルは100字以内で入力してください。',
+                'type.required' => '場所は必須です。',
+                'type.max' =>  'タイトルは100字以内で入力してください。',
+                'detail.required' => '詳細は必須です。',
+                'detail.max' => '詳細は500字以内で入力してください。',
+                'images.*.file' => '画像ファイルを選択してください。',
+                'images.*.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。',
+                'images.*.max' => '2M以内の画像を選択してください。',
             ]);
 
             // 商品登録

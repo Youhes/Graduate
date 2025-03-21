@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', '写真管理システム')
+@section('title', '観光情報管理システム')
 
 @section('content_header')
-    <h1>写真管理</h1>
+    <h1>観光情報管理</h1>
 @stop
 
 @section('content')

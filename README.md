@@ -1,43 +1,29 @@
-## 商品管理システム
+# 観光情報管理システム
 
-### 環境構築手順
+## 概要
 
-* Gitクローン
-* .env.example をコピーして .env を作成
-* MySQLのデータベース作成（名前：item_management）
-* Macの場合 .env の DB_PASSWORD を root に修正（Windowsは修正不要）
+このシステムでは、観光情報の新規登録・更新・削除機能を用いて観光情報を管理することができます。  
 
-    ```INI
-    DB_PASSWORD=root
-    ```
+## 主な機能
+- ログイン・ログアウト機能  
+- 観光情報の一覧・詳細表示  
+- 観光情報の検索機能  
+- 観光情報の新規登録・更新・削除機能
 
-* APP_KEY生成
+## 開発環境
+```
+PHP  8.2.12  
+MySQL 15.1  
+Laravel  10.13.5
+```
 
-    ```console
-    php artisan key:generate
-    ```
+## 設計書
+[設計書ページへ](https://drive.google.com/drive/folders/12JRE3ouJ6iBieAbQtv6ZdE2T15mV7F6z?usp=drive_link)
+    
+## システム閲覧
+[アプリケーションページへ](https://guraduate-b1de2ca5866e.herokuapp.com/login)
 
-* Composerインストール
+## テストアカウント情報
 
-    ```console
-    composer install
-    ```
-
-* フロント環境構築
-
-    ```console
-    npm ci
-    npm run build
-    ```
-
-* マイグレーション
-
-    ```console
-    php artisan migrate
-    ```
-
-* 起動
-
-    ```console
-    php artisan serve
-    ```
+メールアドレス：2222@2  
+パスワード：22222222

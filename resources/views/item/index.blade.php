@@ -3,13 +3,25 @@
 @section('title', '観光情報管理システム')
 
 @section('content_header')
+<<<<<<< HEAD
     <h1>観光情報管理</h1>
+=======
+    <h1>観光情報一覧</h1>
+>>>>>>> b519776a5a2a3e83b156133a2e5eeb653dd26a5f
 @stop
 
 @section('content')
 <link rel="stylesheet" href="/css/style.css" >
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <div class="row">
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"> -->
+ <!-- フラッシュメッセージ表示 -->
+ @if (session('success'))
+    <div class="alert alert-info">
+        {{ session('success') }}
+    </div>
+@endif  
+<div class="row">
+
+        
                     <form id="form1" method="GET" action="{{route('/items/index')}}">
                                     @csrf
                                         <input type="keyword" class="form-control" name="keyword" value="{{ $keyword }}" placeholder="検索キーワード">
@@ -18,7 +30,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">フォルダ一覧</h3>
+                    <h3 class="card-title">一覧</h3>
                     <div class="card-tools">
                         <div class="input-group input-group-sm">
                             <div class="input-group-append">
@@ -32,7 +44,13 @@
     @foreach ($items as $item)
     <li class="el_flexItem">
     <button class="card card-skin">
-  <div class="card__imgframe"><img src="{{ asset('storage/images/' . basename($item->path1)) }}" alt="" height="150px"></div>
+  <div class="card__imgframe">
+    @if (!empty($item->path1))
+    <img src="{{ Storage::disk('s3')->url($item->path1) }}" alt="登録画像" height="150px"></img>
+    @else 
+    <span>画像なし</span>
+    @endif
+    </div>
   <div class="card__textbox">
   <li>
     <a href="/items/show/{{ $item->id }}" class="btn btn-outline-primary" margin-bottom="10px">
@@ -52,7 +70,7 @@
 </li>
        @endforeach
        @if (empty($item))
-               キーワードに該当するデータ：0件            
+               データ：0件            
         @endif
 </ul>
 

@@ -1,0 +1,35 @@
+.card-title{
+    color: gray;
+    font-size: 14px;
+}
+
+.card-primary{
+    border:none;
+}
+
+.form-group{
+    margin-right:5px;
+}
+
+.card-footer{
+    border:none;
+}
+
+.example{
+    width: 100%;
+    height: 100%;
+    border:none;
+    /* padding: 10px; */
+}
+
+.example img{
+    height: 170px;
+	width: 170px;
+    border:none;
+	vertical-align: bottom;
+	/* 追加 */
+	object-fit: cover;
+    /* margin-top: 10px;
+    margin-right: 10px; */
+    margin-bottom : 15px;
+}

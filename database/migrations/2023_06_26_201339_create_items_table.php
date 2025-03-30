@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('path4')->nullable();
             $table->string('path5')->nullable();
             $table->string('detail', 500)->nullable();
-            $table->text('image')->nullable();
+            // $table->text('image')->nullable();
             $table->timestamps();
         });
     }

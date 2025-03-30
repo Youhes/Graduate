@@ -57,4 +57,10 @@ class Item extends Model
     protected $hidden = [
     ];
 
+    public function user()
+	{
+		//Userモデルのデータを取得する
+	    return $this->belongsTo(User::class);
+	}
+
 }

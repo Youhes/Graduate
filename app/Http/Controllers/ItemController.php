@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
- 
+
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
-use Intervention\Image\ImageManager;
-use Intervention\Image\Drivers\Gd\Driver;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
 class ItemController extends Controller
@@ -45,7 +44,7 @@ class ItemController extends Controller
 
 
         //全件件取得
-        $items = $query->orderBy('id', 'desc')->paginate(12);
+        $items = $query->orderBy('id', 'desc')->paginate(9);
 
         return view('item.index', compact('items', 'keyword'));
     }
@@ -60,6 +59,20 @@ class ItemController extends Controller
             // バリデーション
             $this->validate($request, [
                 'name' => 'required|max:100',
+                'type' => 'required|max:100',
+                'detail' => 'required|max:500',
+                'images.*' => 'nullable|file|mimes:jpeg,png,jpe,jpg|max:1024',
+            ],
+            [
+                'name.required' => 'タイトルは必須です。',
+                'name.max' =>  'タイトルは100字以内で入力してください。',
+                'type.required' => '場所は必須です。',
+                'type.max' =>  '場所は100字以内で入力してください。',
+                'detail.required' => '詳細は必須です。',
+                'detail.max' => '詳細は500字以内で入力してください。',
+                'images.*.file' => '画像ファイルを選択してください。',
+                'images.*.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。',
+                'images.*.max' => '1M以内の画像を選択してください。',
             ]);
 
             // 商品登録
@@ -91,17 +104,34 @@ class ItemController extends Controller
         if ($request->isMethod('post')) {
             // バリデーション
             $this->validate($request, [
-                'images.*' => 'nullable|file|mimes:jpeg,png,jpe,jpg|max:3000',
-            ]);
-        }
-        $images = $request->file('images');
-        //dd($images);
+                'name' => 'required|max:100',
+                'type' => 'required|max:100',
+                'detail' => 'required|max:500',
+                'images.*' => 'nullable|file|mimes:jpeg,png,jpe,jpg|max:1024',
+            ],
+        [
+            'name.required' => 'タイトルは必須です。',
+            'name.max' =>  'タイトルは100字以内で入力してください。',
+            'type.required' => '場所は必須です。',
+            'type.max' =>  '場所は100字以内で入力してください。',
+            'detail.required' => '詳細は必須です。',
+            'detail.max' => '詳細は500字以内で入力してください。',
+            'images.*.file' => '画像ファイルを選択してください。',
+            'images.*.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。',
+            'images.*.max' => '1M以内の画像を選択してください。',
+        ]);
+    }
 
+        $images = $request->file('images');
+        
         $paths = [];
-        foreach ($images as $image) {
-            if ($image->isValid()) {
-                $path = $image->store('public/images');
-                $paths[] = $path;
+        if (!empty($images)) {
+            foreach ($images as $image) {
+                if ($image->isValid()) {
+                    // $path = $image->store('public/images');
+                    $path = Storage::disk('s3')->put('guraduate/test', $image);
+                    $paths[] = $path;
+                }
             }
         }
 
@@ -113,19 +143,7 @@ class ItemController extends Controller
         $item->paths = $paths;
         $item->save();
 
-        return redirect('/items');
-    }
-
-
-    /*
- *詳細表示      
- * 
- */
-    public function show($id)
-    {
-
-        $item = Item::findOrfail($id);
-        return view('item.show', compact('item'));
+        return redirect('/items')->with('success', "タイトル：{$item->name}　 登録が完了しました！");
     }
 
     /**
@@ -140,45 +158,122 @@ class ItemController extends Controller
 
     /**
      * 更新する
+     * 
      * @param Request $request
      * @param $id
      * @return Response
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required|max:100',
-        ],
-        [
+        // dd($request);
+        $request->validate(
+            [
+                'name' => 'required|max:100',
+                'type' => 'required|max:100',
+                'detail' => 'required|max:500',
+                'image1' => 'nullable|file|mimes:jpeg,png,jpe,jpg|max:1024',
+                'image2' => 'nullable|file|mimes:jpeg,png,jpe,jpg|max:1024',
+                'image3' => 'nullable|file|mimes:jpeg,png,jpe,jpg|max:1024',
+                'image4' => 'nullable|file|mimes:jpeg,png,jpe,jpg|max:1024',
+                'image5' => 'nullable|file|mimes:jpeg,png,jpe,jpg|max:1024',
+            ],
+            [
             'name.required' => 'タイトルは必須です。',
-            'name.max' => '100文字以内で入力してください。',
-        ]);
+            'name.max' =>  'タイトルは100字以内で入力してください。',
+            'type.required' => '場所は必須です。',
+            'type.max' =>  '場所は100字以内で入力してください。',
+            'detail.required' => '詳細は必須です。',
+            'detail.max' => '詳細は500字以内で入力してください。',
+            'image1.file' => '画像ファイルを選択してください。',
+            'image1.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。',
+            'image1.max' => '1M以内の画像を選択してください。',
+            'image2.file' => '画像ファイルを選択してください。',
+            'image2.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。',
+            'image2.max' => '1M以内の画像を選択してください。',
+            'image3.file' => '画像ファイルを選択してください。',
+            'image3.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。',
+            'image3.max' => '1M以内の画像を選択してください。',
+            'image4.file' => '画像ファイルを選択してください。',
+            'image4.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。',
+            'image4.max' => '1M以内の画像を選択してください。',
+            'image5.file' => '画像ファイルを選択してください。',
+            'image5.mimes' => '拡張子はjpeg/png/jpe/jpgのいずれかで選択してください。',
+            'image5.max' => '1M以内の画像を選択してください。',
+            ]
+        );
 
-        $item = Item::find($request->id);
+        $item = Item::find($id);
 
-        $images = $request->file('images');
-        $paths = $item->images;
-       
 
-        $paths = [];
-        foreach ($images as $image) {
-            if (isset($image)) {
-                    Storage::disk('public')->delete('images/'.$image);
-                    $path = $image->store('public/images');
-                    $paths[] = $path;
-                        }
-                    };
-                     //dd($images);
+        if (!empty($request->file('image1'))) {
+            if($item->path1){
+                Storage::delete($item->path1);
+            }
+            $image1 = $request->file('image1');
+            $path1 = Storage::disk('s3')->put('guraduate/test', $image1);
+            $item->path1 = $path1;
+            $item->update();
+        }
 
-       
+        
+        if (!empty($request->file('image2'))) {
+            if($item->path2){
+                Storage::delete($item->path2);
+            }
+            $image2 = $request->file('image2');
+            $path2 = Storage::disk('s3')->put('guraduate/test', $image2);
+            $item->path2 = $path2;
+            $item->update();
+        }
+
+        if (!empty($request->file('image3'))) {
+            if($item->path1){
+                Storage::delete($item->path1);
+            }
+            $image3 = $request->file('image3');
+            $path3 = Storage::disk('s3')->put('guraduate/test', $image3);
+            $item->path3 = $path3;
+            $item->update();
+        }
+
+        if (!empty($request->file('image4'))) {
+            if($item->path4){
+                Storage::delete($item->path4);
+            }
+            $image4 = $request->file('image4');
+            $path4 = Storage::disk('s3')->put('guraduate/test', $image4);
+            $item->path4 = $path4;
+            $item->update();
+        }
+
+        if (!empty($request->file('image5'))) {
+            if($item->path5){
+                Storage::delete($item->path5);
+            }
+            $image5 = $request->file('image5');
+            $path5 = Storage::disk('s3')->put('guraduate/test', $image5);
+            $item->path5 = $path5;
+            $item->update();
+        }
+
         $item->update([
-        'name'=> $request->name,
-        'type'=> $request->type,
-        'detail' => $request->detail,
-        'paths' => $paths,
+            'name' => $request->name,
+            'type' => $request->type,
+            'detail' => $request->detail,
+        
         ]);
 
-        return redirect('/items')->with('success', "フォルダ{$item->id}を更新しました！");
+        return redirect('/items')->with('success', "タイトル：{$item->name} 　更新が完了しました！");
+    }
+     /*
+    *詳細表示      
+    * 
+    */
+    public function show($id)
+    {
+
+    $item = Item::with('user')->find($id);
+    return view('item.show', compact('item'));
     }
 
     /**
@@ -194,6 +289,6 @@ class ItemController extends Controller
         $item = Item::find($id);
         $item->delete();
 
-        return redirect('/items')->with('success', "フォルダ{$item->id}を削除しました！");
+        return redirect('/items')->with('success', "タイトル：{$item->name}  　フォルダを削除しました！");
     }
 }

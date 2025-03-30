@@ -3,11 +3,7 @@
 @section('title', '観光情報管理システム')
 
 @section('content_header')
-<<<<<<< HEAD
     <h1>観光情報管理</h1>
-=======
-    <h1>観光情報一覧</h1>
->>>>>>> b519776a5a2a3e83b156133a2e5eeb653dd26a5f
 @stop
 
 @section('content')
